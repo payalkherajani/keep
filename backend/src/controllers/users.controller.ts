@@ -52,4 +52,26 @@ const signInWithoutSignIn = async (req: Request, res: Response) => {
     }
 };
 
-export default { signUpWithoutGoogleAPI, signInWithoutSignIn };
+// need to do this
+const googleAPI = async (req: Request, res: Response) => {
+    try {
+        res.send("working");
+    } catch (err) {
+        return res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
+const getLoggedInUserInfo = async (req: Request, res: Response) => {
+    try {
+        const userId = req.user!.id;
+        const user = await User.findOne({ _id: userId });
+        if (!user) {
+            return res.status(400).json({ success: false, message: 'No User Found' });
+        }
+        return res.status(200).json({ success: true, user });
+    } catch (err) {
+        return res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
+export default { signUpWithoutGoogleAPI, signInWithoutSignIn, googleAPI, getLoggedInUserInfo };
