@@ -10,7 +10,6 @@ const signUp = async (req: Request, res: Response) => {
 
     try {
         const { name, email, password }: UserFieldsInterface = req.body!;
-        console.log(req.body);
 
         const userAlreadyExistswithEmail = await User.findOne({ email });
 
