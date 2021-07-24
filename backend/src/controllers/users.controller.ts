@@ -3,10 +3,14 @@ import User, { UserFieldsInterface } from "../models/users.model";
 import bcrypt from 'bcrypt';
 import gravatar from 'gravatar';
 import { generateToken } from "../utils/token";
+import mongoose from 'mongoose';
+
 
 const signUp = async (req: Request, res: Response) => {
+
     try {
         const { name, email, password }: UserFieldsInterface = req.body!;
+        console.log(req.body);
 
         const userAlreadyExistswithEmail = await User.findOne({ email });
 
@@ -14,6 +18,7 @@ const signUp = async (req: Request, res: Response) => {
             const avatar = gravatar.url(email, { s: '200', r: 'pg', d: 'robohash' }, true);
             const hashedPassword = bcrypt.hashSync(password, 10);
             const user = new User({
+                _id: new mongoose.Types.ObjectId(),
                 name,
                 email,
                 password: hashedPassword,
@@ -27,6 +32,7 @@ const signUp = async (req: Request, res: Response) => {
         }
 
     } catch (err) {
+        console.log(err);
         return res.status(500).json({ success: false, message: 'Server Error' });
     }
 };
@@ -65,4 +71,4 @@ const getLoggedInUserInfo = async (req: Request, res: Response) => {
     }
 };
 
-export default { signUp, signIn, getLoggedInUserInfo };
+export { signUp, signIn, getLoggedInUserInfo };

@@ -3,6 +3,7 @@ import Notes from "../models/notes.model";
 
 const addANewNote = async (req: Request, res: Response) => {
     try {
+        console.log(req.user);
         const userId = req.user;
         const { text, tag } = req.body;
         const loggedInUserNotes = await Notes.findOne({ user: userId });
