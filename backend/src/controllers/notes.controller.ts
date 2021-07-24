@@ -39,6 +39,7 @@ const addANewNote = async (req: Request, res: Response) => {
             };
 
             const notes = _.extend(loggedInUserNotes, note);
+            await notes.save();
             return res.status(200).json({ success: true, message: 'Added a New Note', notes });
         }
 
@@ -47,4 +48,16 @@ const addANewNote = async (req: Request, res: Response) => {
     }
 };
 
-export { addANewNote };
+const getAllNotesOfLoggedInUser = async (req: Request, res: Response) => {
+    try {
+        const userId = req.user?.id;
+        const loggedInUser = await Notes.findOne({ user: userId });
+        const notes = loggedInUser?.notes;
+        return res.status(200).json({ success: true, notes });
+
+    } catch (err) {
+        return res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+
+export { addANewNote, getAllNotesOfLoggedInUser };
