@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 import { UserFieldsInterface } from './users.model';
 
 
-export interface Notes {
+export interface NotesArr {
     _id: string;
     text: string;
     pinned: boolean;
@@ -12,7 +12,7 @@ export interface Notes {
 export interface NotesInterfaceSchema {
     _id: string;
     user: UserFieldsInterface;
-    notes: Notes[];
+    notes: NotesArr[];
 }
 
 const notesSchema = new Schema<NotesInterfaceSchema>(
@@ -52,6 +52,6 @@ const notesSchema = new Schema<NotesInterfaceSchema>(
 
 );
 
-const User = mongoose.model<NotesInterfaceSchema>('users', notesSchema);
+const Notes = mongoose.model<NotesInterfaceSchema>('notes', notesSchema);
 
-export default User;
+export default Notes;

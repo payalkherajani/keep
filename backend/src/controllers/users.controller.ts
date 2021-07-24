@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import gravatar from 'gravatar';
 import { generateToken } from "../utils/token";
 
-const signUpWithoutGoogleAPI = async (req: Request, res: Response) => {
+const signUp = async (req: Request, res: Response) => {
     try {
         const { name, email, password }: UserFieldsInterface = req.body!;
 
@@ -31,7 +31,7 @@ const signUpWithoutGoogleAPI = async (req: Request, res: Response) => {
     }
 };
 
-const signInWithoutSignIn = async (req: Request, res: Response) => {
+const signIn = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body!;
         const user = await User.findOne({ email });
@@ -52,15 +52,6 @@ const signInWithoutSignIn = async (req: Request, res: Response) => {
     }
 };
 
-// need to do this
-const googleAPI = async (req: Request, res: Response) => {
-    try {
-        res.send("working");
-    } catch (err) {
-        return res.status(500).json({ success: false, message: 'Server Error' });
-    }
-};
-
 const getLoggedInUserInfo = async (req: Request, res: Response) => {
     try {
         const userId = req.user!.id;
@@ -74,4 +65,4 @@ const getLoggedInUserInfo = async (req: Request, res: Response) => {
     }
 };
 
-export default { signUpWithoutGoogleAPI, signInWithoutSignIn, googleAPI, getLoggedInUserInfo };
+export default { signUp, signIn, getLoggedInUserInfo };
