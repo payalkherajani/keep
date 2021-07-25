@@ -111,4 +111,33 @@ const updateNoteWithID = async (req: Request, res: Response) => {
         return res.status(500).json({ success: false, message: 'Server Error' });
     }
 };
-export { addANewNote, getAllNotesOfLoggedInUser, updateNoteWithID };
+
+const deleteNote = async (req: Request, res: Response) => {
+    try {
+
+        const userId = req.user?.id;
+        const { noteID } = req.params;
+        const loggedInUser = await Notes.findOne({ user: userId });
+        const filteredNotesAfterRemoving = loggedInUser?.notes.filter((n) => {
+            if (n._id != noteID) {
+                return n;
+            }
+        });
+
+        const note = {
+            _id: loggedInUser?._id,
+            user: userId,
+            notes: filteredNotesAfterRemoving
+        };
+
+        const newUpdatedNotes = _.extend(loggedInUser, note)
+            ;
+        await newUpdatedNotes.save();
+        return res.status(200).json({ success: true, newUpdatedNotes });
+
+
+    } catch (err) {
+        return res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+export { addANewNote, getAllNotesOfLoggedInUser, updateNoteWithID, deleteNote };
