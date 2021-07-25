@@ -60,4 +60,55 @@ const getAllNotesOfLoggedInUser = async (req: Request, res: Response) => {
     }
 };
 
-export { addANewNote, getAllNotesOfLoggedInUser };
+
+const updateNoteWithID = async (req: Request, res: Response) => {
+    try {
+        const userId = req.user?.id;
+        const { noteID } = req.params;
+        const { text, tag, pinned } = req.body;
+        const loggedInUser = await Notes.findOne({ user: userId });
+        const notes = loggedInUser?.notes;
+        const isNotePresent = notes?.some((n) => n._id == noteID);
+        if (isNotePresent) {
+
+            if (notes !== undefined) {
+
+                const updatedNotes = notes.map((n) => {
+                    if (n._id == noteID) {
+                        if (text) {
+                            n.text = text;
+                        }
+                        if (tag) {
+                            n.tag = tag;
+                        }
+                        if (pinned !== null) {
+                            n.pinned = pinned;
+                        }
+                        return n;
+                    }
+                    else {
+                        return n;
+                    }
+                });
+
+                const note = {
+                    _id: loggedInUser?._id,
+                    user: userId,
+                    notes: updatedNotes
+                };
+
+                const newUpdatedNotes = _.extend(loggedInUser, note)
+                    ;
+                await newUpdatedNotes.save();
+                return res.status(200).json({ success: true, newUpdatedNotes });
+            }
+        }
+        else {
+            return res.status(400).json({ success: false, message: 'Invalid Note ID' });
+
+        }
+    } catch (err) {
+        return res.status(500).json({ success: false, message: 'Server Error' });
+    }
+};
+export { addANewNote, getAllNotesOfLoggedInUser, updateNoteWithID };
