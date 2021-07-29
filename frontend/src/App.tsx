@@ -4,7 +4,7 @@ import Login from './screens/Login';
 function App() {
 
   return (
-    <div>
+    <div className="container mx-auto min-h-screen">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
