@@ -18,7 +18,8 @@ const addANewNote = async (req: Request, res: Response) => {
                     {
                         _id: new mongoose.Types.ObjectId(),
                         text,
-                        tag
+                        tag,
+                        background_active_color: 'white'
                     }
                 ]
             });
@@ -33,7 +34,8 @@ const addANewNote = async (req: Request, res: Response) => {
                 notes: [...loggedInUserNotes.notes, {
                     _id: new mongoose.Types.ObjectId(),
                     text,
-                    tag
+                    tag,
+                    background_active_color: 'white'
                 }]
 
             };
@@ -65,7 +67,7 @@ const updateNoteWithID = async (req: Request, res: Response) => {
     try {
         const userId = req.user?.id;
         const { noteID } = req.params;
-        const { text, tag, pinned } = req.body;
+        const { text, tag, pinned, background_active_color } = req.body;
         const loggedInUser = await Notes.findOne({ user: userId });
         const notes = loggedInUser?.notes;
         const isNotePresent = notes?.some((n) => n._id == noteID);
@@ -83,6 +85,9 @@ const updateNoteWithID = async (req: Request, res: Response) => {
                         }
                         if (pinned !== null) {
                             n.pinned = pinned;
+                        }
+                        if (background_active_color) {
+                            n.background_active_color = background_active_color;
                         }
                         return n;
                     }

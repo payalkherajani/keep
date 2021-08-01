@@ -7,6 +7,7 @@ export interface NotesArr {
     text: string;
     pinned: boolean;
     tag: string;
+    background_active_color: string;
 }
 
 export interface NotesInterfaceSchema {
@@ -41,6 +42,9 @@ const notesSchema = new Schema<NotesInterfaceSchema>(
                     type: String,
                     enum: ['IMPORTANT', 'CASUAL'],
                     required: true
+                },
+                background_active_color: {
+                    type: String,
                 }
             }
         ]
