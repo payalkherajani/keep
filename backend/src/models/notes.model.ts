@@ -4,7 +4,8 @@ import { UserFieldsInterface } from './users.model';
 
 export interface NotesArr {
     _id: string;
-    text: string;
+    note_title: string;
+    note_description: string;
     pinned: boolean;
     tag: string;
     background_active_color: string;
@@ -30,9 +31,13 @@ const notesSchema = new Schema<NotesInterfaceSchema>(
                 _id: {
                     type: mongoose.Schema.Types.ObjectId
                 },
-                text: {
+                note_title: {
                     type: String,
-                    required: ["Text is Required"]
+                    required: ["Note Title is Required"]
+                },
+                note_description: {
+                    type: String,
+                    required: ["Note Description is Required"]
                 },
                 pinned: {
                     type: Boolean,

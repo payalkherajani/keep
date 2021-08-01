@@ -7,7 +7,7 @@ const addANewNote = async (req: Request, res: Response) => {
     try {
 
         const userId = req.user?.id;
-        const { text, tag } = req.body;
+        const { note_title, tag, note_description } = req.body;
         let loggedInUserNotes = await Notes.findOne({ user: userId });
         if (loggedInUserNotes === null) {
 
@@ -17,7 +17,8 @@ const addANewNote = async (req: Request, res: Response) => {
                 notes: [
                     {
                         _id: new mongoose.Types.ObjectId(),
-                        text,
+                        note_title,
+                        note_description,
                         tag,
                         background_active_color: 'white'
                     }
@@ -33,7 +34,8 @@ const addANewNote = async (req: Request, res: Response) => {
                 user: userId,
                 notes: [...loggedInUserNotes.notes, {
                     _id: new mongoose.Types.ObjectId(),
-                    text,
+                    note_title,
+                    note_description,
                     tag,
                     background_active_color: 'white'
                 }]
@@ -67,7 +69,7 @@ const updateNoteWithID = async (req: Request, res: Response) => {
     try {
         const userId = req.user?.id;
         const { noteID } = req.params;
-        const { text, tag, pinned, background_active_color } = req.body;
+        const { note_title, note_description, tag, pinned, background_active_color } = req.body;
         const loggedInUser = await Notes.findOne({ user: userId });
         const notes = loggedInUser?.notes;
         const isNotePresent = notes?.some((n) => n._id == noteID);
@@ -77,8 +79,11 @@ const updateNoteWithID = async (req: Request, res: Response) => {
 
                 const updatedNotes = notes.map((n) => {
                     if (n._id == noteID) {
-                        if (text) {
-                            n.text = text;
+                        if (note_title) {
+                            n.note_title = note_title;
+                        }
+                        if (note_description) {
+                            n.note_description = note_description;
                         }
                         if (tag) {
                             n.tag = tag;
