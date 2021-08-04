@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { AddANoteModal } from '../components';
+import { Navbar, Footer, NotesCard } from '../components';
 
 const Notes = () => {
-    const [showModal, setShowModal] = useState(false);
     return (
-        <div className="container mx-auto">
-            <div>
-                {showModal && <AddANoteModal />}
-            </div>
-            <div>All Notes</div>
+        <div className="container" style={{ maxWidth: '100%', margin: '0rem' }}>
+            <Navbar />
+            <NotesCard />
+            <Footer />
         </div>
     );
 };
