@@ -1,9 +1,13 @@
 import React from 'react';
+import { AddANoteModal } from '../components';
 
 const Notes = () => {
     return (
         <div className="container mx-auto">
-            MY NOTES
+            <div>
+                <AddANoteModal />
+            </div>
+            <div>All Notes</div>
         </div>
     );
 };
