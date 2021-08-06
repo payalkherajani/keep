@@ -6,7 +6,6 @@ const Notes = () => {
         <div className="container" style={{ maxWidth: '100%', margin: '0rem' }}>
             <Navbar />
             <NotesCard />
-            <Footer />
         </div>
     );
 };
