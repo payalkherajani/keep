@@ -2,10 +2,9 @@ import React from 'react';
 
 const Navbar = () => {
     return (
-        <div className="container flex">
-            <div>Smriti</div>
-            <div>Welcome User</div>
-            <div><button>Logout</button></div>
+        <div className="container bg-purple-400 py-8 flex md:px-8 text-white flex justify-between px-4" style={{ maxWidth: '100%' }}>
+            <h1><strong>Smriti</strong></h1>
+            <div><button><i className="fas fa-sign-out-alt text-2xl"></i></button></div>
         </div>
     );
 };
