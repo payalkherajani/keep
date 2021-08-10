@@ -17,9 +17,9 @@ function NotesCard(props: { showModal: boolean; }) {
                     </div>
 
                     <div className="flex justify-around">
-                        <i className="fas fa-pen"></i>
-                        <i className="fas fa-trash-alt"></i>
-                        <i className="fas fa-thumbtack"></i>
+                        <i className="fas fa-pen text-xl fill-current text-blue-600"></i>
+                        <i className="fas fa-trash-alt text-xl fill-current text-red-600"></i>
+                        <i className="fas fa-thumbtack text-xl fill-current text-gray-600"></i>
                         {/* <TwitterPicker /> */}
                         <input type="color" id="head" name="head" value="#e66465" />
                     </div>
@@ -34,9 +34,9 @@ function NotesCard(props: { showModal: boolean; }) {
                     </div>
 
                     <div className="flex justify-around">
-                        <i className="fas fa-pen"></i>
-                        <i className="fas fa-trash-alt"></i>
-                        <i className="fas fa-thumbtack"></i>
+                        <i className="fas fa-pen text-xl fill-current text-blue-600"></i>
+                        <i className="fas fa-trash-alt text-xl fill-current text-red-600"></i>
+                        <i className="fas fa-thumbtack text-xl fill-current text-gray-600"></i>
                         {/* <TwitterPicker /> */}
                         <input type="color" id="head" name="head" value="#e66465" />
                     </div>
