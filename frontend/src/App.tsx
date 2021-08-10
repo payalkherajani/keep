@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Footer } from './components';
 import { Login, Register, Notes } from './screens';
 
 
@@ -14,7 +13,6 @@ function App() {
           <Route path="/notes" element={<Notes />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }

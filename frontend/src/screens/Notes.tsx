@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar, NotesCard, Modal } from '../components';
+import { Navbar, NotesCard, Modal, Footer } from '../components';
 
 const Notes = () => {
     const [showModal, setShowModal] = useState(false);
@@ -19,6 +19,7 @@ const Notes = () => {
             {
                 showModal && <Modal setShowModal={setShowModal} />
             }
+            <Footer />
         </div>
     );
 };
