@@ -3,7 +3,7 @@ import React from 'react';
 const Modal = (props: { setShowModal: any; }) => {
     return (
         <>
-            <form className="flex flex-col shadow-xl border-2 border-black absolute w-9/12 md:w-6/12  z-10 p-4" style={{
+            <form className="flex flex-col bg-white shadow-2xl border-2 border-purple-800 absolute w-9/12 md:w-6/12 xl:w-5/12  z-50 p-4" style={{
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
