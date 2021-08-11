@@ -52,6 +52,7 @@ const Register = (): JSX.Element => {
                             value={name}
                             name="name"
                             onChange={onChangeHandler}
+                            required
                         />
                         <input
                             type="email"
@@ -60,6 +61,7 @@ const Register = (): JSX.Element => {
                             value={email}
                             name="email"
                             onChange={onChangeHandler}
+                            required
                         />
                         <input
                             type="password"
@@ -68,6 +70,7 @@ const Register = (): JSX.Element => {
                             name="password"
                             value={password}
                             onChange={onChangeHandler}
+                            required
                         />
                         <input
                             type="password"
@@ -76,6 +79,7 @@ const Register = (): JSX.Element => {
                             name="confirmpassword"
                             value={confirmpassword}
                             onChange={onChangeHandler}
+                            required
                         />
                         <button
                             className="text-white py-2 px-4 font-semibold rounded-lg bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 mb-4"
