@@ -19,7 +19,7 @@ const Login = (): JSX.Element => {
         if (response.status === 200) {
             const { data: { token } } = response;
             localStorage.setItem('token', token);
-            navigate('/landing');
+            navigate('/notes');
         }
         else {
             const errorMessage = response.data.message;
