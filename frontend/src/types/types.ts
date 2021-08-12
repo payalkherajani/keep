@@ -1,11 +1,7 @@
-import { GET_ALL_NOTES } from "../constants/Constants";
+import { GET_ALL_NOTES, GET_USER_DETAILS } from "../constants/Constants";
 export interface StateInterface {
     notes: Notes[];
-    user: {
-        name: string;
-        email: string;
-        avatar: string;
-    };
+    user: User;
     note: Notes;
 }
 
@@ -18,6 +14,10 @@ export type ActionsTypes =
     | {
         type: typeof GET_ALL_NOTES,
         payload: { categories: Notes[]; };
+    }
+    | {
+        type: typeof GET_USER_DETAILS,
+        payload: { user: User; };
     };
 
 export interface Notes {
@@ -27,4 +27,15 @@ export interface Notes {
     pinned: boolean;
     tag: string;
     background_active_color: string;
+}
+
+export interface getUserDetailsRes {
+    success: boolean;
+    user: User;
+}
+
+export interface User {
+    name: string;
+    email: string;
+    avatar: string;
 }

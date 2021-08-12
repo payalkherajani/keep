@@ -1,10 +1,14 @@
 import React, { Fragment } from 'react';
-import { TwitterPicker } from 'react-color';
+import { useAppContext } from '../context/Context';
 
 function NotesCard(props: { showModal: boolean; }) {
+
+    const { state, dispatch } = useAppContext();
+    const { user } = state;
+
     return (
         <Fragment>
-            {props.showModal === false ? (<h2 className="text-center my-5"><strong>Welcome User</strong></h2>) : null}
+            {props.showModal === false ? (<h2 className="text-center my-5"><strong>Welcome {user.name}</strong></h2>) : null}
             <ul
                 className={`grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 xl:gap-8 font-semibold text-gray-900 text-center p-4 relative ${props.showModal === true ? ('opacity-10') : ('opacity-1')}`}
             >

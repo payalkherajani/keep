@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar, NotesCard, Modal, Footer } from '../components';
+import { useAppContext } from '../context/Context';
+import { getLoggedInUserInfo } from '../services/users';
 
 const Notes = () => {
     const [showModal, setShowModal] = useState(false);
+    const { dispatch } = useAppContext();
+    useEffect(() => {
+        getLoggedInUserInfo(dispatch);
+    }, []);
     return (
         <div className="container" style={{ maxWidth: '100%', margin: '0rem' }}>
             <Navbar />
