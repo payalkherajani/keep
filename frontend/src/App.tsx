@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Login, Register, Notes } from './screens';
 import PrivateRoute from './routes/PrivateRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
           <PrivateRoute path="/notes" element={<Notes />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }
