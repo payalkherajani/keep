@@ -6,7 +6,20 @@ export const CustomContext = React.createContext({} as ContextValue);
 
 
 const initialState: StateInterface = {
-    notes: []
+    notes: [],
+    user: {
+        email: '',
+        name: '',
+        avatar: ''
+    },
+    note: {
+        _id: '',
+        note_title: '',
+        note_description: '',
+        pinned: false,
+        tag: '',
+        background_active_color: '',
+    }
 };
 
 export const Provider: React.FC = ({ children }): JSX.Element => {

@@ -1,6 +1,12 @@
 import { GET_ALL_NOTES } from "../constants/Constants";
 export interface StateInterface {
-    notes: [];
+    notes: Notes[];
+    user: {
+        name: string;
+        email: string;
+        avatar: string;
+    };
+    note: Notes;
 }
 
 export interface ContextValue {
