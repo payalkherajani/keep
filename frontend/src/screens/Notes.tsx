@@ -6,9 +6,11 @@ import { getLoggedInUserInfo } from '../services/users';
 const Notes = () => {
     const [showModal, setShowModal] = useState(false);
     const { dispatch } = useAppContext();
+
     useEffect(() => {
         getLoggedInUserInfo(dispatch);
     }, []);
+
     return (
         <div className="container" style={{ maxWidth: '100%', margin: '0rem' }}>
             <Navbar />

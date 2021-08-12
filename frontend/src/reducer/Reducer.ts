@@ -11,7 +11,7 @@ export const reducer = (state: StateInterface, action: ActionsTypes): StateInter
 
     switch (action.type) {
         case GET_ALL_NOTES:
-            return { ...state, notes: [] };
+            return { ...state, notes: action.payload.notes };
 
         case GET_USER_DETAILS:
             return { ...state, user: action.payload.user };

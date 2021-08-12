@@ -1,10 +1,15 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useAppContext } from '../context/Context';
+import { getNotesOfLoggedInUser } from '../services/notes';
 
 function NotesCard(props: { showModal: boolean; }) {
 
     const { state, dispatch } = useAppContext();
     const { user } = state;
+
+    useEffect(() => {
+        getNotesOfLoggedInUser(dispatch);
+    }, []);
 
     return (
         <Fragment>

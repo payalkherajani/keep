@@ -13,7 +13,7 @@ export interface ContextValue {
 export type ActionsTypes =
     | {
         type: typeof GET_ALL_NOTES,
-        payload: { categories: Notes[]; };
+        payload: { notes: Notes[]; };
     }
     | {
         type: typeof GET_USER_DETAILS,
