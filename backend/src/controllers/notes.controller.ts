@@ -48,6 +48,7 @@ const addANewNote = async (req: Request, res: Response) => {
         }
 
     } catch (err) {
+        console.log(err);
         return res.status(500).json({ success: false, message: 'Server Error' });
     }
 };
