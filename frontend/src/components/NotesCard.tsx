@@ -11,8 +11,6 @@ function NotesCard(props: { showModal: boolean; }) {
         getNotesOfLoggedInUser(dispatch);
     }, []);
 
-    console.log({ notes });
-
     return (
         <Fragment>
             {props.showModal === false ? (<h2 className="text-center my-5"><strong>Welcome {user.name}</strong></h2>) : null}

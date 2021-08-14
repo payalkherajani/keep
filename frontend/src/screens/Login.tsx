@@ -16,7 +16,6 @@ const Login = (): JSX.Element => {
     const onLoginFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const response = await userLogin(formData);
-        console.log({ response });
         if (response.status === 200) {
             const { data: { token } } = response;
             localStorage.setItem('token', token);
