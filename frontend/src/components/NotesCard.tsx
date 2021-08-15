@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { useAppContext } from '../context/Context';
-import { getNotesOfLoggedInUser, deleteNote, updatePinFeature } from '../services/notes';
+import { getNotesOfLoggedInUser, deleteNote, updatePinFeature, updateBGColor } from '../services/notes';
 
 function NotesCard(props: { showModal: boolean; }) {
 
@@ -22,9 +22,9 @@ function NotesCard(props: { showModal: boolean; }) {
         await updatePinFeature({ id, pin }, dispatch);
     };
 
-    const updateBackgroundDetails = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
-        console.log({ id });
-
+    const updateBackgroundDetails = async (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+        const { value } = e.target;
+        await updateBGColor({ id, value }, dispatch);
     };
 
 
@@ -48,6 +48,7 @@ function NotesCard(props: { showModal: boolean; }) {
                                 return <li
                                     className="flex flex-col relative rounded-xl ring-1 ring-black ring-opacity-5 shadow-sm w-full py-6 px-6 shadow-lg h-auto gap-7"
                                     key={note._id}
+                                    style={{ backgroundColor: note.background_active_color }}
                                 >
                                     <div className="flex flex-col gap-7 mt-5 mb-5">
                                         <p>{note.note_title}</p>
@@ -56,19 +57,19 @@ function NotesCard(props: { showModal: boolean; }) {
 
                                     <div className="flex justify-around">
                                         <i
-                                            className="fas fa-pen text-xl fill-current text-blue-600"
+                                            className="fas fa-pen text-xl fill-current text-blue-600 cursor-pointer"
                                             onClick={(e) => updateDetails(e, note._id)}
                                         >
 
                                         </i>
                                         <i
-                                            className="fas fa-trash-alt text-xl fill-current text-red-600"
+                                            className="fas fa-trash-alt text-xl fill-current text-red-600 cursor-pointer"
                                             onClick={(e) => deleteNoteWithID(e, note._id)}
                                         >
 
                                         </i>
                                         <i
-                                            className={`${note.pinned === true ? ("fas fa-unlink text-xl fill-current text-gray-600") : ("fas fa-link text-xl fill-current text-gray-600")}`}
+                                            className={`${note.pinned === true ? ("fas fa-unlink text-xl fill-current text-gray-600 cursor-pointer") : ("fas fa-link text-xl fill-current text-gray-600 cursor-pointer")}`}
                                             onClick={(e) => updatePinDetails(e, note._id, note.pinned)}
 
                                         >
@@ -79,6 +80,7 @@ function NotesCard(props: { showModal: boolean; }) {
                                             name="head"
                                             value={note.background_active_color}
                                             onChange={(e) => updateBackgroundDetails(e, note._id)}
+                                            className="cursor-pointer"
                                         />
                                     </div>
                                     <span className=" absolute right-5 bg-green-300 text-green-800 text-xs px-2 rounded-full uppercase font-semibold tracking-wide">{note.tag}</span>
