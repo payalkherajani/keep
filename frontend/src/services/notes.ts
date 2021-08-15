@@ -59,4 +59,21 @@ const updateBGColor = async (data: { id: string, value: string; }, dispatch: Dis
     }
 };
 
-export { getNotesOfLoggedInUser, addANewNote, deleteNote, updatePinFeature, updateBGColor };
+
+const updateNote = async (data: { note_title: string, note_description: string, tag: string; }, id: string, dispatch: Dispatch<ActionsTypes>) => {
+    try {
+        const { note_title, note_description, tag } = data;
+        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/notes/${id}`, {
+            note_title,
+            note_description,
+            tag
+        }, { headers: { 'x-auth-token': localStorage.getItem('token') } });
+        dispatch({ type: GET_ALL_NOTES, payload: { notes: response.data.newUpdatedNotes.notes } });
+        return response;
+    } catch (err) {
+        const errorMessage = err.response.data.message;
+        toast.error(errorMessage);
+    }
+};
+
+export { getNotesOfLoggedInUser, addANewNote, deleteNote, updatePinFeature, updateBGColor, updateNote };

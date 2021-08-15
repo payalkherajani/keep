@@ -1,8 +1,14 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useAppContext } from '../context/Context';
 import { getNotesOfLoggedInUser, deleteNote, updatePinFeature, updateBGColor } from '../services/notes';
+import { Notes } from '../types/types';
+import { FETCH_NOTE_DETAILS, CLEAR_NOTE } from '../constants/Constants';
+import EditModal from './EditModal';
 
+// updateNoteInfo
 function NotesCard(props: { showModal: boolean; }) {
+
+    const [editModalOpen, setEditModalOpen] = useState(false);
 
     const { state, dispatch } = useAppContext();
     const { notes, user } = state;
@@ -11,8 +17,9 @@ function NotesCard(props: { showModal: boolean; }) {
         getNotesOfLoggedInUser(dispatch);
     }, []);
 
-    const updateDetails = (e: React.MouseEvent, id: string) => {
-        console.log({ id });
+    const updateDetails = (e: React.MouseEvent, note: Notes) => {
+        setEditModalOpen(true);
+        dispatch({ type: FETCH_NOTE_DETAILS, payload: { note: note } });
     };
 
     const deleteNoteWithID = async (e: React.MouseEvent, id: string) => {
@@ -27,10 +34,12 @@ function NotesCard(props: { showModal: boolean; }) {
         await updateBGColor({ id, value }, dispatch);
     };
 
-
     return (
         <Fragment>
-            {props.showModal === false ? (<h2 className="text-center my-5"><strong>Welcome {user.name}</strong></h2>) : null}
+            {props.showModal === false ? (
+                <h2 className="text-center my-5">
+                    <strong>Welcome {user.name}</strong>
+                </h2>) : null}
             {
                 notes.length === 0 ? (
                     <div
@@ -58,7 +67,7 @@ function NotesCard(props: { showModal: boolean; }) {
                                     <div className="flex justify-around">
                                         <i
                                             className="fas fa-pen text-xl fill-current text-blue-600 cursor-pointer"
-                                            onClick={(e) => updateDetails(e, note._id)}
+                                            onClick={(e) => updateDetails(e, note)}
                                         >
 
                                         </i>
@@ -90,6 +99,13 @@ function NotesCard(props: { showModal: boolean; }) {
 
 
                     </ul>)
+            }
+            {
+                editModalOpen === true ? (
+                    <EditModal
+                        setEditModalOpen={setEditModalOpen}
+                    />
+                ) : (null)
             }
         </Fragment>
     );
