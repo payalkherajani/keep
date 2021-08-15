@@ -10,7 +10,6 @@ import { getLoggedInUserInfo } from './services/users';
 
 function App() {
   const { state, dispatch } = useAppContext();
-  console.log({ state });
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
