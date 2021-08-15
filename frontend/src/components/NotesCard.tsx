@@ -11,6 +11,22 @@ function NotesCard(props: { showModal: boolean; }) {
         getNotesOfLoggedInUser(dispatch);
     }, []);
 
+    const updateDetails = (e: React.MouseEvent, id: string) => {
+        console.log({ id });
+    };
+
+    const deleteNoteWithID = (e: React.MouseEvent, id: string) => {
+        console.log({ id });
+    };
+    const updatePinDetails = (e: React.MouseEvent, id: string) => {
+        console.log({ id });
+    };
+
+    const updateBackgroundDetails = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+        console.log({ id });
+
+    };
+
     return (
         <Fragment>
             {props.showModal === false ? (<h2 className="text-center my-5"><strong>Welcome {user.name}</strong></h2>) : null}
@@ -38,14 +54,30 @@ function NotesCard(props: { showModal: boolean; }) {
                                     </div>
 
                                     <div className="flex justify-around">
-                                        <i className="fas fa-pen text-xl fill-current text-blue-600"></i>
-                                        <i className="fas fa-trash-alt text-xl fill-current text-red-600"></i>
-                                        <i className="fas fa-thumbtack text-xl fill-current text-gray-600"></i>
+                                        <i
+                                            className="fas fa-pen text-xl fill-current text-blue-600"
+                                            onClick={(e) => updateDetails(e, note._id)}
+                                        >
+
+                                        </i>
+                                        <i
+                                            className="fas fa-trash-alt text-xl fill-current text-red-600"
+                                            onClick={(e) => deleteNoteWithID(e, note._id)}
+                                        >
+
+                                        </i>
+                                        <i
+                                            className="fas fa-thumbtack text-xl fill-current text-gray-600"
+                                            onClick={(e) => updatePinDetails(e, note._id)}
+
+                                        >
+
+                                        </i>
                                         <input
                                             type="color"
                                             name="head"
                                             value={note.background_active_color}
-                                            onChange={() => console.log("onchange")}
+                                            onChange={(e) => updateBackgroundDetails(e, note._id)}
                                         />
                                     </div>
                                     <span className=" absolute right-5 bg-green-300 text-green-800 text-xs px-2 rounded-full uppercase font-semibold tracking-wide">{note.tag}</span>
@@ -63,20 +95,4 @@ function NotesCard(props: { showModal: boolean; }) {
 export default NotesCard;
 
 
-//                         <li
-//                             className="flex flex-col relative rounded-xl ring-1 ring-black ring-opacity-5 shadow-sm w-full py-6 px-6 shadow-lg h-auto gap-7"
-//                         >
-//                             <div className="flex flex-col gap-7 mt-5 mb-5">
-//                                 <p>Title</p>
-//                                 <p>Description</p>
-//                             </div>
 
-//                             <div className="flex justify-around">
-//                                 <i className="fas fa-pen text-xl fill-current text-blue-600"></i>
-//                                 <i className="fas fa-trash-alt text-xl fill-current text-red-600"></i>
-//                                 <i className="fas fa-thumbtack text-xl fill-current text-gray-600"></i>
-//                                 {/* <TwitterPicker /> */}
-//                                 <input type="color" id="head" name="head" value="#e66465" />
-//                             </div>
-//                             <span className=" absolute right-5 bg-green-300 text-green-800 text-xs px-2 rounded-full uppercase font-semibold tracking-wide">CSL</span>
-//                         </li>
