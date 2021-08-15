@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { useAppContext } from '../context/Context';
-import { getNotesOfLoggedInUser } from '../services/notes';
+import { getNotesOfLoggedInUser, deleteNote } from '../services/notes';
 
 function NotesCard(props: { showModal: boolean; }) {
 
@@ -15,8 +15,8 @@ function NotesCard(props: { showModal: boolean; }) {
         console.log({ id });
     };
 
-    const deleteNoteWithID = (e: React.MouseEvent, id: string) => {
-        console.log({ id });
+    const deleteNoteWithID = async (e: React.MouseEvent, id: string) => {
+        await deleteNote(dispatch, id);
     };
     const updatePinDetails = (e: React.MouseEvent, id: string) => {
         console.log({ id });

@@ -1,7 +1,7 @@
 import axios from "axios";
-import { Dispatch } from 'react';
+import React, { Dispatch } from 'react';
 import { toast } from 'react-toastify';
-import { GET_ALL_NOTES } from "../constants/Constants";
+import { DELETE_NOTE, GET_ALL_NOTES } from "../constants/Constants";
 import { ActionsTypes, Notes } from '../types/types';
 
 const getNotesOfLoggedInUser = async (dispatch: Dispatch<ActionsTypes>) => {
@@ -25,4 +25,15 @@ const addANewNote = async (data: { note_title: string, note_description: string,
         toast.error(errorMessage);
     }
 };
-export { getNotesOfLoggedInUser, addANewNote };
+
+const deleteNote = async (dispatch: Dispatch<ActionsTypes>, id: string) => {
+    try {
+        const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/notes/${id}`, { headers: { 'x-auth-token': localStorage.getItem('token') } });
+        dispatch({ type: DELETE_NOTE, payload: { notes: response.data.newUpdatedNotes.notes } });
+        toast.success("Note is deleted");
+    } catch (err) {
+        const errorMessage = err.response.data.message;
+        toast.error(errorMessage);
+    }
+};
+export { getNotesOfLoggedInUser, addANewNote, deleteNote };

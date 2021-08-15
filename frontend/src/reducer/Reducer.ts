@@ -1,4 +1,5 @@
 import {
+    DELETE_NOTE,
     GET_ALL_NOTES, GET_USER_DETAILS
 } from '../constants/Constants';
 
@@ -15,6 +16,9 @@ export const reducer = (state: StateInterface, action: ActionsTypes): StateInter
 
         case GET_USER_DETAILS:
             return { ...state, user: action.payload.user };
+
+        case DELETE_NOTE:
+            return { ...state, notes: action.payload.notes };
 
         default:
             return state;
