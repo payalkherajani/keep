@@ -37,7 +37,7 @@ const addANewNote = async (req: Request, res: Response) => {
                     note_title,
                     note_description,
                     tag,
-                    background_active_color: 'white'
+                    background_active_color: '#fff'
                 }]
 
             };
