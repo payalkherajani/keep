@@ -57,7 +57,9 @@ const getAllNotesOfLoggedInUser = async (req: Request, res: Response) => {
     try {
         const userId = req.user?.id;
         const loggedInUser = await Notes.findOne({ user: userId });
-        const notes = loggedInUser?.notes || [];
+        const notes = loggedInUser?.notes.sort((a, b) => {
+            return (a.pinned === b.pinned) ? 0 : a.pinned ? -1 : 1;
+        }) || [];
         return res.status(200).json({ success: true, notes });
 
     } catch (err) {
