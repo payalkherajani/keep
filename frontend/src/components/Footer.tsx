@@ -28,7 +28,7 @@ function Footer() {
                     </li>
 
                     <li className="hover:text-purple-800">
-                        <a href="https://www.instagram.com/" target="_blank">
+                        <a href="https://www.instagram.com/payal_kherajani/" target="_blank">
                             <i className={`fab fa-instagram text-2xl`}></i>
                         </a>
                     </li>
