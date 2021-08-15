@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Dispatch } from 'react';
 import { toast } from 'react-toastify';
-import { DELETE_NOTE, GET_ALL_NOTES } from "../constants/Constants";
+import { DELETE_NOTE, GET_ALL_NOTES, UPDATE_NOTE } from "../constants/Constants";
 import { ActionsTypes, Notes } from '../types/types';
 
 const getNotesOfLoggedInUser = async (dispatch: Dispatch<ActionsTypes>) => {
@@ -36,4 +36,15 @@ const deleteNote = async (dispatch: Dispatch<ActionsTypes>, id: string) => {
         toast.error(errorMessage);
     }
 };
-export { getNotesOfLoggedInUser, addANewNote, deleteNote };
+
+const updatePinFeature = async (data: { id: string, pin: boolean; }, dispatch: Dispatch<ActionsTypes>) => {
+    try {
+        const { id, pin } = data;
+        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/notes/${id}`, { 'pinned': !pin }, { headers: { 'x-auth-token': localStorage.getItem('token') } });
+        dispatch({ type: UPDATE_NOTE, payload: { notes: response.data.newUpdatedNotes.notes } });
+    } catch (err) {
+        const errorMessage = err.response.data.message;
+        toast.error(errorMessage);
+    }
+};
+export { getNotesOfLoggedInUser, addANewNote, deleteNote, updatePinFeature };

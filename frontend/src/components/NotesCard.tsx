@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { useAppContext } from '../context/Context';
-import { getNotesOfLoggedInUser, deleteNote } from '../services/notes';
+import { getNotesOfLoggedInUser, deleteNote, updatePinFeature } from '../services/notes';
 
 function NotesCard(props: { showModal: boolean; }) {
 
@@ -18,14 +18,15 @@ function NotesCard(props: { showModal: boolean; }) {
     const deleteNoteWithID = async (e: React.MouseEvent, id: string) => {
         await deleteNote(dispatch, id);
     };
-    const updatePinDetails = (e: React.MouseEvent, id: string) => {
-        console.log({ id });
+    const updatePinDetails = async (e: React.MouseEvent, id: string, pin: boolean) => {
+        await updatePinFeature({ id, pin }, dispatch);
     };
 
     const updateBackgroundDetails = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
         console.log({ id });
 
     };
+
 
     return (
         <Fragment>
@@ -67,8 +68,8 @@ function NotesCard(props: { showModal: boolean; }) {
 
                                         </i>
                                         <i
-                                            className="fas fa-thumbtack text-xl fill-current text-gray-600"
-                                            onClick={(e) => updatePinDetails(e, note._id)}
+                                            className={`${note.pinned === true ? ("fas fa-unlink text-xl fill-current text-gray-600") : ("fas fa-link text-xl fill-current text-gray-600")}`}
+                                            onClick={(e) => updatePinDetails(e, note._id, note.pinned)}
 
                                         >
 

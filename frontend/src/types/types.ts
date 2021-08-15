@@ -1,4 +1,4 @@
-import { DELETE_NOTE, GET_ALL_NOTES, GET_USER_DETAILS } from "../constants/Constants";
+import { DELETE_NOTE, GET_ALL_NOTES, GET_USER_DETAILS, UPDATE_NOTE } from "../constants/Constants";
 export interface StateInterface {
     notes: Notes[];
     user: User;
@@ -21,6 +21,10 @@ export type ActionsTypes =
     } |
     {
         type: typeof DELETE_NOTE,
+        payload: { notes: Notes[]; };
+    } |
+    {
+        type: typeof UPDATE_NOTE,
         payload: { notes: Notes[]; };
     };
 
