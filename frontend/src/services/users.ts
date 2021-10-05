@@ -9,8 +9,7 @@ const registerNewUser = async (data: { name: string; email: string; password: st
         const { name, email, password } = data;
         const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/register`, { name, email, password });
         return response;
-    } catch (err) {
-        console.log(err);
+    } catch (err: any) {
         return err.response;
     }
 };
@@ -22,7 +21,7 @@ const userLogin = async (data: { email: string; password: string; }) => {
             email, password
         });
         return response;
-    } catch (err) {
+    } catch (err: any) {
         return err.response;
     }
 };
@@ -37,7 +36,7 @@ const getLoggedInUserInfo = async (dispatch: Dispatch<ActionsTypes>) => {
             avatar: user.avatar
         };
         dispatch({ type: GET_USER_DETAILS, payload: { user: userObject } });
-    } catch (err) {
+    } catch (err: any) {
         const errorMessage = err.response.data.message;
         toast.error(errorMessage);
     }

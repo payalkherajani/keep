@@ -40,6 +40,7 @@ const signIn = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body!;
         const user = await User.findOne({ email });
+
         if (user) {
             const isPasswordMatch = await bcrypt.compare(password, user.password);
             if (isPasswordMatch) {
@@ -50,6 +51,12 @@ const signIn = async (req: Request, res: Response) => {
             else {
                 return res.status(400).json({ success: false, message: 'Invalid Credentials' });
             }
+        }
+        else if (user === null) {
+            return res.status(400).json({ success: false, message: 'Invalid Credentials' });
+        }
+        else {
+            return res.status(400).json({ success: false, message: 'Something went wrong' });
         }
 
     } catch (err) {

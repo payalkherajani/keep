@@ -3,7 +3,7 @@ import React from 'react';
 function Footer() {
     return (
         <div
-            className="container bg-purple-400 py-10 px-2 md:px-8  text-white flex justify-between fixed bottom-0"
+            className="container bg-purple-400 py-10 px-2 md:px-8  text-white flex justify-between"
             style={{ maxWidth: '100%' }}
         >
             <h6><strong>Copyright &copy; 2021 Smriti</strong> </h6>

@@ -9,7 +9,8 @@ const getNotesOfLoggedInUser = async (dispatch: Dispatch<ActionsTypes>) => {
         const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/notes`, { headers: { 'x-auth-token': localStorage.getItem('token') } });
         const { notes } = response.data;
         dispatch({ type: GET_ALL_NOTES, payload: { notes: notes } });
-    } catch (err) {
+        return response;
+    } catch (err: any) {
         const errorMessage = err.response.data.message;
         toast.error(errorMessage);
     }
@@ -20,7 +21,7 @@ const addANewNote = async (data: { note_title: string, note_description: string,
         const { note_description, note_title, tag } = data;
         const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/notes`, { note_title, note_description, tag }, { headers: { 'x-auth-token': localStorage.getItem('token') } });
         return response;
-    } catch (err) {
+    } catch (err: any) {
         const errorMessage = err.response.data.message;
         toast.error(errorMessage);
     }
@@ -31,7 +32,7 @@ const deleteNote = async (dispatch: Dispatch<ActionsTypes>, id: string) => {
         const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/notes/${id}`, { headers: { 'x-auth-token': localStorage.getItem('token') } });
         dispatch({ type: DELETE_NOTE, payload: { notes: response.data.newUpdatedNotes.notes } });
         toast.success("Note is deleted");
-    } catch (err) {
+    } catch (err: any) {
         const errorMessage = err.response.data.message;
         toast.error(errorMessage);
     }
@@ -42,7 +43,7 @@ const updatePinFeature = async (data: { id: string, pin: boolean; }, dispatch: D
         const { id, pin } = data;
         const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/notes/${id}`, { 'pinned': !pin }, { headers: { 'x-auth-token': localStorage.getItem('token') } });
         dispatch({ type: UPDATE_NOTE, payload: { notes: response.data.newUpdatedNotes.notes } });
-    } catch (err) {
+    } catch (err: any) {
         const errorMessage = err.response.data.message;
         toast.error(errorMessage);
     }
@@ -53,7 +54,7 @@ const updateBGColor = async (data: { id: string, value: string; }, dispatch: Dis
         const { id, value } = data;
         const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/notes/${id}`, { 'background_active_color': value }, { headers: { 'x-auth-token': localStorage.getItem('token') } });
         dispatch({ type: UPDATE_NOTE, payload: { notes: response.data.newUpdatedNotes.notes } });
-    } catch (err) {
+    } catch (err: any) {
         const errorMessage = err.response.data.message;
         toast.error(errorMessage);
     }
@@ -70,7 +71,7 @@ const updateNote = async (data: { note_title: string, note_description: string, 
         }, { headers: { 'x-auth-token': localStorage.getItem('token') } });
         dispatch({ type: GET_ALL_NOTES, payload: { notes: response.data.newUpdatedNotes.notes } });
         return response;
-    } catch (err) {
+    } catch (err: any) {
         const errorMessage = err.response.data.message;
         toast.error(errorMessage);
     }

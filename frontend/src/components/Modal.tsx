@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { TextareaHTMLAttributes, useState } from 'react';
 import { addANewNote } from '../services/notes';
 import { toast } from 'react-toastify';
 import { GET_ALL_NOTES } from '../constants/Constants';
@@ -40,6 +40,11 @@ const Modal = (props: { setShowModal: any; }) => {
         setFormData({ ...formData, tag: value });
     };
 
+    const onChangeHandlerTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
 
     return (
         <>
@@ -56,14 +61,14 @@ const Modal = (props: { setShowModal: any; }) => {
                     onChange={onChangeHandler}
                 />
 
-                <input
-                    type="text"
+                <textarea
                     name="note_description"
                     placeholder="Enter Description"
                     className="px-4 py-3 mb-8 text-purple-500 border-2 border-purple-400 focus:border-purple-600 hover:border-purple-300 focus:outline-none mb-4"
                     value={note_description}
-                    onChange={onChangeHandler}
-                />
+                    onChange={onChangeHandlerTextArea}
+                    rows={7}
+                > </textarea>
 
                 <select className="px-4 py-3 mb-8 border-2 border-purple-400 hover:border-purple-300 focus:border-purple-600 focus:outline-none" value={tag} onChange={onChangeSelectHandler} name="tag">
                     <option value="IMPORTANT" >IMPORTANT</option>

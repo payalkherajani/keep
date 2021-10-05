@@ -57,13 +57,25 @@ const Login = (): JSX.Element => {
                             required
                         />
 
-                        <button
-                            className="text-white py-2 px-4 font-semibold rounded-lg bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 mb-4"
-                        >
-                            LOGIN
-                        </button>
+                        <div className="flex justify-between">
+                            <button
+                                className="text-white py-2 px-4 font-semibold rounded-lg bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 mb-4"
+                            >
+                                LOGIN
+                            </button>
 
-                        <p>Don't have an account?
+                            <button
+                                className="text-white py-2 px-4 font-semibold rounded-lg bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 mb-4"
+                                onClick={() => {
+                                    setFormData({ ...formData, email: 'guestuser@gmail.com', password: '123456' });
+                                }}
+                            >
+                                GUEST LOGIN
+                            </button>
+
+                        </div>
+
+                        <p className="text-center">Don't have an account?
                             <span className="text-purple-700 underline">
                                 <Link to='/register'>
                                     REGISTER

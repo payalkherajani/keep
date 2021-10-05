@@ -39,6 +39,11 @@ const EditModal = (props: { setEditModalOpen: any; }) => {
         }
     };
 
+    const onChangeHandlerTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
     return (
         <div>
             <form className="flex flex-col bg-white shadow-2xl border-2 border-purple-800 absolute w-9/12 md:w-6/12 xl:w-5/12  z-50 p-4"
@@ -54,14 +59,14 @@ const EditModal = (props: { setEditModalOpen: any; }) => {
                     onChange={onChangeHandler}
                 />
 
-                <input
-                    type="text"
+                <textarea
                     name="note_description"
                     placeholder="Enter Description"
                     className="px-4 py-3 mb-8 text-purple-500 border-2 border-purple-400 focus:border-purple-600 hover:border-purple-300 focus:outline-none mb-4"
                     value={note_description}
-                    onChange={onChangeHandler}
-                />
+                    onChange={onChangeHandlerTextArea}
+                    rows={7}
+                ></textarea>
 
                 <select className="px-4 py-3 mb-8 border-2 border-purple-400 hover:border-purple-300 focus:border-purple-600 focus:outline-none" value={tag} onChange={onChangeSelectHandler} name="tag">
                     <option value="IMPORTANT" >IMPORTANT</option>
